@@ -1,0 +1,7 @@
+# This is a list of name patterns that GIT will ignore. Most projects have lots
+# of "working" data that isn't supposed to be checked in. 
+
+# Ignore Python virtual environments of different names
+.venv/
+venv/
+
