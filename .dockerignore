@@ -1,2 +1,6 @@
 **/*.sqlite3
 **/__pycache__
+venv*/
+.venv/
+.devcontainer
+.github
