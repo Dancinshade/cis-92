@@ -10,7 +10,7 @@ RUN useradd -d /app -M django
 
 # Copy the Python code into the container (as the new user)
 COPY --chown=django:django djangotutorial /app
-
+RUN chmod ugo+x /app/start.sh
 # Set environment variables 
 ENV PORT=8080 
 ENV STUDENT_NAME="No Name"
