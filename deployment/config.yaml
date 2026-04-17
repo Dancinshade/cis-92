@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysite-config
+data:
+    PORT: "8080" 
+    STUDENT_NAME: "Arrena Shoemaker"
+    SITE_NAME: "www.greengoblin.com"
+    DATA_DIR: "/data"
+    DEBUG: "1"

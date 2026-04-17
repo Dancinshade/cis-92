@@ -7,36 +7,31 @@ metadata:
 spec:
   containers:
   - name: django
-    image: ghcr.io/dancinshade/cis-92:latest
+    image: ghcr.io/dancinshade/cis-92:milestone-5.2
     ports:
     - containerPort: 8080
     resources:
       requests:
-        cpu: 250m 
+        cpu: 1000m 
         memory: 512Mi
         ephemeral-storage: 10Mi
       limits:
-        cpu: 250m 
+        cpu: 1000m 
         memory: 512Mi
         ephemeral-storage: 10Mi
-    env:
-    - name: STUDENT_NAME
-      value: "Arrena Shoemaker"
-    - name: SITE_NAME
-      value: "www.greengoblin.com"
-    - name: SECRET_KEY 
-      value: "d0n7u537h15"
-    - name: DEBUG
-      value: "1"
-    - name: DATA_DIR
-      value: "/data"
-    - name: PORT
-      value: "8080"
-    - name: DJANGO_SUPERUSER_NAME
-      value: "test"
-    - name: DJANGO_SUPERUSER_EMAIL
-      value: "test@test.test"
-    - name: DJANOGO_SUPERUSER_PASSWORD
-      value: "test"
+    envFrom:
+-      configMapRef:
+        name: mysite-config
+-      secretRef:
+        name: mysite-secret
+        volumeMounts:
+      - name: db
+        mountPath: /data
+  volumes:
+      - name: db
+        persistentVolumeClaim:
+            claimName: mysite-data
+  securityContext:
+    fsGroup: 1000
 
   
