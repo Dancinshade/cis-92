@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django
+  labels:
+    app: django
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      function: app
+  template:
+    metadata:
+      labels:
+        function : app
+    spec:
+      containers:
+      - name: django
+        image: ghcr.io/dancinshade/cis-92:milestone-10.1
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 1000m 
+            memory: 512Mi
+            ephemeral-storage: 10Mi
+          limits:
+            cpu: 1000m 
+            memory: 512Mi
+            ephemeral-storage: 10Mi
+        envFrom:
+        - configMapRef:
+            name: mysite-config
+        - secretRef:
+            name: mysite-secrets
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+            httpHeaders:
+            - name: host
+              value: localhost 
+          initialDelaySeconds: 10
+          failureThreshold: 3
+          periodSeconds: 10
+      securityContext:
+        fsGroup: 1000

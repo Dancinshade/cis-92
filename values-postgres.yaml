@@ -7,10 +7,10 @@ auth:
 primary:
   resources:
     requests:
-      memory: "512Mi"
+      memory: "1024Mi"
       cpu: "500m"
       ephemeral-storage: "100Mi"
     limits:
-      memory: "512Mi"
+      memory: "1024Mi"
       cpu: "500m"
       ephemeral-storage: "100Mi"
